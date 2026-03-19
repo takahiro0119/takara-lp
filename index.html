@@ -38,10 +38,28 @@
             display: block;
             cursor: pointer;
             transition: opacity 0.3s ease;
+            animation: bounce 2s ease-in-out infinite;
         }
         
         .cta-link:hover {
             opacity: 0.85;
+            animation-play-state: paused;
+        }
+        
+        /* ぽよんぽよんアニメーション */
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.03);
+            }
+            50% {
+                transform: scale(0.97);
+            }
+            75% {
+                transform: scale(1.02);
+            }
         }
         
         /* フッター */
@@ -277,10 +295,10 @@
         document.getElementById('popupDate').textContent = `📅 ${month}月${day}日現在`;
         document.getElementById('popupTitle').textContent = `${month}月の残り研修受け入れ枠`;
         
-        // 3秒後にポップアップ表示
+        // 6秒後にポップアップ表示
         setTimeout(() => {
             document.getElementById('popup').classList.add('show');
-        }, 3000);
+        }, 6000);
         
         // 閉じるボタン
         document.getElementById('popupClose').addEventListener('click', () => {
