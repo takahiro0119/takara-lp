@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建職チョイス | ユニットバス取り付け研修</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        .section {
+            width: 100%;
+        }
+        
+        .section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* CTAボタンのリンク */
+        .cta-link {
+            display: block;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cta-link:hover {
+            opacity: 0.85;
+        }
+        
+        /* フッター */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+        
+        /* ポップアップオーバーレイ */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        
+        .popup-overlay.show {
+            display: flex;
+        }
+        
+        /* ポップアップ本体 */
+        .popup-modal {
+            background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+            border-radius: 16px;
+            max-width: 340px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: popupIn 0.4s ease-out;
+            overflow: hidden;
+        }
+        
+        @keyframes popupIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* 閉じるボタン */
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            z-index: 10;
+        }
+        
+        .popup-close:hover {
+            color: #333;
+        }
+        
+        /* ポップアップヘッダー */
+        .popup-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: #fff;
+            padding: 16px 20px;
+        }
+        
+        .popup-date {
+            font-size: 14px;
+            margin-bottom: 6px;
+            opacity: 0.9;
+        }
+        
+        .popup-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 残り枠数 */
+        .popup-count {
+            padding: 24px 20px;
+            background: #fff;
+        }
+        
+        .popup-count-label {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .popup-count-number {
+            font-size: 64px;
+            font-weight: bold;
+            color: #e74c3c;
+            line-height: 1;
+        }
+        
+        .popup-count-unit {
+            font-size: 24px;
+            color: #333;
+            margin-left: 4px;
+        }
+        
+        /* ポップアップフッター */
+        .popup-footer {
+            padding: 16px 20px 24px;
+            background: #f9f9f9;
+        }
+        
+        .popup-message {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .popup-cta {
+            display: block;
+            background: linear-gradient(135deg, #06c755 0%, #05a847 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .popup-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 199, 85, 0.5);
+        }
+        
+        .popup-cta-sub {
+            display: block;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ファーストビュー -->
+        <section class="section">
+            <img src="01_hero.png" alt="ユニットバス取り付け技術を身に付け月収70万円以上の安定収入を目指しませんか？">
+        </section>
+        
+        <!-- CTA① -->
+        <section class="section">
+            <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="cta-link">
+                <img src="02_cta_button.png" alt="今すぐ友だち追加して研修の詳細を受け取る">
+            </a>
+        </section>
+        
+        <!-- 収入シミュレーション -->
+        <section class="section">
+            <img src="03_income_simulation.png" alt="収入シミュレーション - 週5日で月52〜70万円">
+        </section>
+        
+        <!-- 3つの安心ポイント① -->
+        <section class="section">
+            <img src="04_point1.png" alt="研修費0円・収入ゼロ期間なし">
+        </section>
+        
+        <!-- 3つの安心ポイント② -->
+        <section class="section">
+            <img src="05_point2.png" alt="タカラスタンダード提携で営業・集客不要">
+        </section>
+        
+        <!-- 3つの安心ポイント③ -->
+        <section class="section">
+            <img src="06_point3.png" alt="元手がなくてもスタート可能">
+        </section>
+        
+        <!-- 三角形テキスト -->
+        <section class="section">
+            <img src="07_triangle_text.png" alt="LINEを友だち追加して研修の詳細をご確認ください！">
+        </section>
+        
+        <!-- CTA② -->
+        <section class="section">
+            <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="cta-link">
+                <img src="08_cta_button_final.png" alt="今すぐ友だち追加して研修の詳細を受け取る">
+            </a>
+        </section>
+        
+        <!-- フッター -->
+        <footer class="footer">
+            <p>© 2025 建職チョイス</p>
+        </footer>
+    </div>
+    
+    <!-- ポップアップ -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-modal">
+            <span class="popup-close" id="popupClose">&times;</span>
+            <div class="popup-header">
+                <div class="popup-date" id="popupDate">📅 3月19日現在</div>
+                <div class="popup-title" id="popupTitle">3月の残り研修受け入れ枠</div>
+            </div>
+            <div class="popup-count">
+                <div class="popup-count-number">5<span class="popup-count-unit">名</span></div>
+            </div>
+            <div class="popup-footer">
+                <div class="popup-message">お早めにLINEから<br>詳細をお受け取りください</div>
+                <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="popup-cta">
+                    LINEで詳細を受け取る
+                    <span class="popup-cta-sub">＞ 30秒でカンタン登録</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // リアルタイム日付を設定
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        
+        document.getElementById('popupDate').textContent = `📅 ${month}月${day}日現在`;
+        document.getElementById('popupTitle').textContent = `${month}月の残り研修受け入れ枠`;
+        
+        // 3秒後にポップアップ表示
+        setTimeout(() => {
+            document.getElementById('popup').classList.add('show');
+        }, 3000);
+        
+        // 閉じるボタン
+        document.getElementById('popupClose').addEventListener('click', () => {
+            document.getElementById('popup').classList.remove('show');
+        });
+        
+        // オーバーレイクリックで閉じる
+        document.getElementById('popup').addEventListener('click', (e) => {
+            if (e.target.id === 'popup') {
+                document.getElementById('popup').classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
