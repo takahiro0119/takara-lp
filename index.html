@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>建職チョイス | ユニットバス取り付け研修</title>
+    <title>ユニットバス取り付け研修 | 建職チョイス</title>
     <style>
         * {
             margin: 0;
@@ -13,103 +13,104 @@
         
         body {
             font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            background-color: #ffffff;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            background-color: #fff;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 100%;
-            width: 100%;
+            max-width: 750px;
             margin: 0 auto;
-            background-color: #ffffff;
+            background-color: #fff;
         }
         
-        .section {
+        .section-image {
             width: 100%;
-        }
-        
-        .section img {
-            width: 100%;
-            height: auto;
             display: block;
         }
         
-        /* CTAボタンのリンク */
-        .cta-link {
+        /* CTAボタン - ぽよんぽよんアニメーション */
+        .cta-wrapper {
+            padding: 10px 15px;
+            background-color: #fff;
+        }
+        
+        .cta-button {
             display: block;
+            width: 100%;
             cursor: pointer;
-            transition: opacity 0.3s ease;
             animation: bounce 2s ease-in-out infinite;
+            transition: transform 0.2s;
         }
         
-        .cta-link:hover {
-            opacity: 0.85;
-            animation-play-state: paused;
+        .cta-button:hover {
+            transform: scale(1.02);
         }
         
-        /* ぽよんぽよんアニメーション */
+        .cta-button img {
+            width: 100%;
+            display: block;
+        }
+        
         @keyframes bounce {
-            0%, 100% {
-                transform: scale(1);
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
             }
-            25% {
-                transform: scale(1.03);
+            10% {
+                transform: translateY(-8px) scale(1.02);
             }
-            50% {
-                transform: scale(0.97);
+            30% {
+                transform: translateY(-4px) scale(1.01);
             }
-            75% {
-                transform: scale(1.02);
+            40% {
+                transform: translateY(0) scale(1);
+            }
+            60% {
+                transform: translateY(-3px) scale(1.01);
+            }
+            70% {
+                transform: translateY(0) scale(1);
             }
         }
         
-        /* フッター */
-        .footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-        }
-        
-        /* ポップアップオーバーレイ */
-        .popup-overlay {
+        /* モーダル */
+        .modal-overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            display: none;
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
             padding: 20px;
         }
         
-        .popup-overlay.show {
+        .modal-overlay.show {
             display: flex;
         }
         
-        /* ポップアップ本体 */
-        .popup-modal {
+        .modal-content {
             background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
-            border-radius: 16px;
-            max-width: 340px;
+            border-radius: 20px;
+            padding: 30px 25px;
+            max-width: 350px;
             width: 100%;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: popupIn 0.4s ease-out;
-            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalBounce 0.5s ease-out;
         }
         
-        @keyframes popupIn {
+        @keyframes modalBounce {
             0% {
-                transform: scale(0.8);
+                transform: scale(0.5);
                 opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
             }
             100% {
                 transform: scale(1);
@@ -117,186 +118,190 @@
             }
         }
         
-        /* 閉じるボタン */
-        .popup-close {
+        .modal-close {
             position: absolute;
-            top: 10px;
-            right: 14px;
-            font-size: 28px;
-            color: #999;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: #ddd;
+            border-radius: 50%;
             cursor: pointer;
-            line-height: 1;
-            z-index: 10;
+            font-size: 18px;
+            color: #666;
+            line-height: 30px;
+            transition: all 0.2s;
         }
         
-        .popup-close:hover {
+        .modal-close:hover {
+            background: #ccc;
             color: #333;
         }
         
-        /* ポップアップヘッダー */
-        .popup-header {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: #fff;
-            padding: 16px 20px;
-        }
-        
-        .popup-date {
+        .modal-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 14px;
-            margin-bottom: 6px;
-            opacity: 0.9;
-        }
-        
-        .popup-title {
-            font-size: 18px;
             font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
         }
         
-        /* 残り枠数 */
-        .popup-count {
-            padding: 24px 20px;
-            background: #fff;
+        .modal-date {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
         }
         
-        .popup-count-label {
+        .modal-date span {
+            color: #ff6b6b;
+        }
+        
+        .modal-title {
             font-size: 16px;
             color: #666;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
         
-        .popup-count-number {
-            font-size: 64px;
-            font-weight: bold;
-            color: #e74c3c;
-            line-height: 1;
+        .modal-slots {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
         
-        .popup-count-unit {
-            font-size: 24px;
-            color: #333;
-            margin-left: 4px;
-        }
-        
-        /* ポップアップフッター */
-        .popup-footer {
-            padding: 16px 20px 24px;
-            background: #f9f9f9;
-        }
-        
-        .popup-message {
+        .modal-slots-label {
             font-size: 14px;
             color: #666;
-            margin-bottom: 16px;
-            line-height: 1.6;
+            margin-bottom: 5px;
         }
         
-        .popup-cta {
+        .modal-slots-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .modal-slots-number span {
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .modal-cta {
             display: block;
-            background: linear-gradient(135deg, #06c755 0%, #05a847 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #06c755 0%, #05b34d 100%);
+            color: white;
             text-decoration: none;
-            padding: 16px 24px;
+            padding: 18px 30px;
             border-radius: 50px;
             font-size: 16px;
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
         }
         
-        .popup-cta:hover {
+        .modal-cta:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(6, 199, 85, 0.5);
         }
         
-        .popup-cta-sub {
-            display: block;
-            font-size: 12px;
-            font-weight: normal;
-            margin-top: 4px;
-            opacity: 0.9;
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(6, 199, 85, 0.6);
+            }
+        }
+        
+        .modal-line-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin-right: 8px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ファーストビュー -->
-        <section class="section">
-            <img src="01_hero.png" alt="ユニットバス取り付け技術を身に付け月収70万円以上の安定収入を目指しませんか？">
-        </section>
+        <!-- 1. ヒーロー -->
+        <img src="01_hero.png" alt="ユニットバス取り付け研修" class="section-image">
         
-        <!-- CTA① -->
-        <section class="section">
-            <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="cta-link">
+        <!-- 2. CTAボタン（ぽよんぽよん） -->
+        <div class="cta-wrapper">
+            <a href="YOUR_LINE_URL" class="cta-button" target="_blank">
                 <img src="02_cta_button.png" alt="今すぐ友だち追加して研修の詳細を受け取る">
             </a>
-        </section>
+        </div>
         
-        <!-- 収入シミュレーション -->
-        <section class="section">
-            <img src="03_income_simulation.png" alt="収入シミュレーション - 週5日で月52〜70万円">
-        </section>
+        <!-- 3. 収入シミュレーション -->
+        <img src="03_income_simulation.png" alt="収入シミュレーション" class="section-image">
         
-        <!-- 3つの安心ポイント + 三角形テキスト -->
-        <section class="section">
-            <img src="04_points_all.png" alt="3つの安心ポイント - 研修費0円・営業不要・元手なしでスタート可能">
-        </section>
+        <!-- 4. 3つの安心ポイント見出し -->
+        <img src="04_3points_header.png" alt="3つの安心ポイント" class="section-image">
         
-        <!-- CTA② -->
-        <section class="section">
-            <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="cta-link">
-                <img src="08_cta_button_final.png" alt="今すぐ友だち追加して研修の詳細を受け取る">
+        <!-- 5. 3つのポイント詳細 -->
+        <img src="05_3points_detail.png" alt="研修費0円・営業不要・元手なしOK" class="section-image">
+        
+        <!-- 6. 三角形テキスト -->
+        <img src="06_triangle_text.png" alt="LINEを友だち追加して研修の詳細をご確認ください" class="section-image">
+        
+        <!-- 7. CTAボタン（ぽよんぽよん） -->
+        <div class="cta-wrapper">
+            <a href="YOUR_LINE_URL" class="cta-button" target="_blank">
+                <img src="02_cta_button.png" alt="今すぐ友だち追加して研修の詳細を受け取る">
             </a>
-        </section>
-        
-        <!-- フッター -->
-        <footer class="footer">
-            <p>© 2025 建職チョイス</p>
-        </footer>
+        </div>
     </div>
     
-    <!-- ポップアップ -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup-modal">
-            <span class="popup-close" id="popupClose">&times;</span>
-            <div class="popup-header">
-                <div class="popup-date" id="popupDate">📅 3月19日現在</div>
-                <div class="popup-title" id="popupTitle">3月の残り研修受け入れ枠</div>
+    <!-- モーダルポップアップ -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-badge">🔥 緊急募集中</div>
+            <div class="modal-date"><span id="currentDate"></span>現在</div>
+            <div class="modal-title"><span id="currentMonth"></span>の残り研修受け入れ枠</div>
+            <div class="modal-slots">
+                <div class="modal-slots-label">残り</div>
+                <div class="modal-slots-number">5<span>名</span></div>
             </div>
-            <div class="popup-count">
-                <div class="popup-count-number">5<span class="popup-count-unit">名</span></div>
-            </div>
-            <div class="popup-footer">
-                <div class="popup-message">お早めにLINEから<br>詳細をお受け取りください</div>
-                <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="popup-cta">
-                    LINEで詳細を受け取る
-                    <span class="popup-cta-sub">＞ 30秒でカンタン登録</span>
-                </a>
-            </div>
+            <a href="YOUR_LINE_URL" class="modal-cta" target="_blank">
+                <svg class="modal-line-icon" viewBox="0 0 24 24" fill="white">
+                    <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                </svg>
+                今すぐLINEで詳細を確認
+            </a>
         </div>
     </div>
     
     <script>
-        // リアルタイム日付を設定
+        // 現在の日付を設定
         const now = new Date();
         const month = now.getMonth() + 1;
-        const day = now.getDate();
+        const date = now.getDate();
+        document.getElementById('currentDate').textContent = `${month}月${date}日`;
+        document.getElementById('currentMonth').textContent = `${month}月`;
         
-        document.getElementById('popupDate').textContent = `📅 ${month}月${day}日現在`;
-        document.getElementById('popupTitle').textContent = `${month}月の残り研修受け入れ枠`;
-        
-        // 6秒後にポップアップ表示
-        setTimeout(() => {
-            document.getElementById('popup').classList.add('show');
+        // 6秒後にモーダルを表示
+        setTimeout(function() {
+            document.getElementById('modal').classList.add('show');
         }, 6000);
         
-        // 閉じるボタン
-        document.getElementById('popupClose').addEventListener('click', () => {
-            document.getElementById('popup').classList.remove('show');
-        });
+        // モーダルを閉じる
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+        }
         
         // オーバーレイクリックで閉じる
-        document.getElementById('popup').addEventListener('click', (e) => {
-            if (e.target.id === 'popup') {
-                document.getElementById('popup').classList.remove('show');
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
         });
     </script>
